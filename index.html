@@ -11,20 +11,44 @@
             height: 100%;
             overflow: hidden;
         }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .poster {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://s10.gifyu.com/images/SYGkR.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            z-index: 2;
+            position: relative;
         }
     </style>
 </head>
 <body>
-    <iframe id="liveFrame" src="https://tv.durbinlive.pro/api/live/iframe.php?c=https://tv.durbinlive.pro/api/sports/twitter.php?id=1810827240491602142" allowfullscreen></iframe>
+    <div class="iframe-container">
+        <div class="poster" id="poster"></div>
+        <iframe id="liveFrame" src="https://tv.durbinlive.pro/api/live/iframe.php?c=https://tv.durbinlive.pro/api/sports/twitter.php?id=1810827240491602142" allowfullscreen></iframe>
+    </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const iframe = document.getElementById('liveFrame');
+            const poster = document.getElementById('poster');
             
             iframe.addEventListener('load', function() {
+                poster.style.display = 'none';
+
                 const checkAndPlay = () => {
                     try {
                         const playButton = iframe.contentWindow.document.querySelector('button'); // Adjust the selector to the correct play button element
@@ -38,7 +62,7 @@
 
                 checkAndPlay();
                 
-                setInterval(checkAndPlay, 1000); // Attempt to play every 5 seconds
+                setInterval(checkAndPlay, 1000); // Attempt to play every second
             });
         });
     </script>
