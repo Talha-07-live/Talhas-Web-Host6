@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embed Iframe</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-    <iframe src="https://tv.durbinlive.pro/api/live/iframe.php?c=https://tv.durbinlive.pro/api/sports/twitter.php?id=1810821483608043875" width="100%" height="600px" frameborder="0" allowfullscreen></iframe>
+    <iframe id="liveFrame" src="https://tv.durbinlive.pro/api/live/iframe.php?c=https://tv.durbinlive.pro/api/sports/twitter.php?id=1810821483608043875" allow="autoplay"></iframe>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const iframe = document.getElementById('liveFrame');
+            iframe.addEventListener('load', function() {
+                const playButton = iframe.contentWindow.document.querySelector('button'); // Adjust the selector to the correct play button element
+                if (playButton) {
+                    playButton.click();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
